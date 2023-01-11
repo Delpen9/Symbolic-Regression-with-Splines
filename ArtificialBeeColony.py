@@ -1,6 +1,6 @@
 import numpy as np
 
-class SymbolicRegressionArtificialBeeColony:
+class ArtificialBeeColony:
     def __init__(self, X, y, population_size=50, max_generations=50):
         self.X = X
         self.y = y
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
     #create an instance of the symbolic regression class
-    sr = SymbolicRegressionABC(X_train, y_train)
+    sr = ArtificialBeeColony(X_train, y_train)
 
     #optimize the model
     sr.optimize()
