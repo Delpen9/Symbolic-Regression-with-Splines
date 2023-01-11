@@ -75,8 +75,6 @@ class SymbolicRegressionArtificialBeeColony:
 
 
 if __name__ == '__main__':
-    import numpy as np
-
     #generate some toy data
     X = np.random.rand(100, 5)
     y = X[:, 0] + X[:, 1] + X[:, 2]
