@@ -44,3 +44,32 @@ class SymbolicRegressionArtificialBeeColony:
         """
         new_solution = solution + np.random.randn(self.dimension) * 0.1
         return new_solution
+
+    def _scout_bees_phase(self):
+        """
+        The scout bees randomly generate new solutions and replaces the solutions with the worst fitness
+        """
+        fitness = [self._fitness_function(s) for s in self.population]
+        worst_index = np.argmax(fitness)
+        self.population[worst_index] = np.random.randn(self.dimension)
+
+    
+    def optimize(self):
+        """
+        The main optimization loop
+        """
+        for i in range(self.max_generations):
+            self._onlooker_bee_phase()
+            self._scout_bees_phase()
+            for j in range(self.population_size):
+                fitness = self._fitness_function(self.population[j])
+                if fitness < self.best_fitness:
+                    self.best_fitness = fitness
+                    self.best_solution = self.population[j]
+    
+    def predict(self, X_test):
+        """
+        Predict the output for a new set of inputs
+        """
+        return np.dot(X_test, self.best_solution)
+
