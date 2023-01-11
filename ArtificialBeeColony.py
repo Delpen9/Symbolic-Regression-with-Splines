@@ -73,3 +73,26 @@ class SymbolicRegressionArtificialBeeColony:
         """
         return np.dot(X_test, self.best_solution)
 
+
+if __name__ == '__main__':
+    import numpy as np
+
+    #generate some toy data
+    X = np.random.rand(100, 5)
+    y = X[:, 0] + X[:, 1] + X[:, 2]
+
+    #split the data into training and test sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+    #create an instance of the symbolic regression class
+    sr = SymbolicRegressionABC(X_train, y_train)
+
+    #optimize the model
+    sr.optimize()
+
+    #predict the output for the test set
+    y_pred = sr.predict(X_test)
+
+    #evaluate the performance of the model
+    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    print(f'RMSE: {rmse}')
